@@ -1,0 +1,27 @@
+imports:
+  - path: ../../../templates/network/vpc-network.jinja
+
+resources:
+
+- name: vpc-network
+  type: ../../../templates/network/vpc-network.jinja
+  properties:
+    name: rshared-net
+    subnets:
+      - name: compute
+        range: 10.60.0.0/23
+      - name: kubone
+        range: 10.50.7.0/24
+        secondaryIpRanges:
+          - name: services
+            range: 10.50.6.0/24
+          - name: pods
+            range: 10.50.8.0/22
+      - name: rshared-kubone
+        range: 10.70.20.0/24
+        secondaryIpRanges:
+          - name: services
+            range: 10.70.21.0/24
+          - name: pods
+            range: 10.70.22.0/23
+    google-managed-services-range: 10.60.240.0/20
